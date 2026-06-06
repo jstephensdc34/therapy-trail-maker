@@ -12,6 +12,7 @@ import Auth from "./pages/Auth";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 import SharedReport from "./pages/SharedReport";
+import { isSupabaseConfigured } from "@/integrations/supabase/client";
 
 // Create a new QueryClient instance with error handling
 const queryClient = new QueryClient({
@@ -45,6 +46,28 @@ const getBasename = () => {
 const App = () => {
   // Log the app initialization for debugging
   console.log("App initializing with base path:", getBasename());
+
+  if (!isSupabaseConfigured) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background p-6">
+        <div className="max-w-lg w-full border border-border rounded-lg p-6 bg-card text-card-foreground shadow-sm">
+          <h1 className="text-xl font-semibold mb-2">Configuration required</h1>
+          <p className="text-sm text-muted-foreground mb-4">
+            This app needs two environment variables to connect to its backend:
+          </p>
+          <pre className="text-xs bg-muted p-3 rounded mb-4 overflow-x-auto">
+VITE_SUPABASE_URL="https://YOUR-PROJECT.supabase.co"
+VITE_SUPABASE_ANON_KEY="your-anon-key"
+          </pre>
+          <p className="text-sm text-muted-foreground">
+            Add them to a local <code>.env</code> file (for development) or to your
+            hosting provider's environment variables (e.g. Vercel → Project Settings
+            → Environment Variables), then redeploy.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <ErrorBoundary>
