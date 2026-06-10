@@ -108,19 +108,6 @@ const Index = () => {
             </div>
           </div>
         </div>
-        
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Admin Link - visible only to authenticated users */}
-          {isAuthenticated && (
-            <div className="bg-white p-6 rounded-lg shadow-md border border-gray-100 hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-semibold mb-2">Admin Tools</h3>
-              <p className="text-gray-600 mb-4">Access administrative tools including library data management.</p>
-              <Link to="/admin" className="text-blue-600 hover:underline">
-                Access Admin Panel →
-              </Link>
-            </div>
-          )}
-        </div>
       </div>
       
       <footer className="bg-white py-6 border-t border-gray-200 mt-12">
